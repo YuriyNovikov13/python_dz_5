@@ -48,4 +48,6 @@ string_input_encode = get_encode(string_input)
 write_file(string_input_encode, fail_name_encode)
 string_output = read_file(fail_name_encode)
 string_output_decode = get_decode(string_output)
-print(string_output_decode)
+
+print(f'сжатие => {string_input_encode}')
+print(f' восстановление => {string_output_decode}')
