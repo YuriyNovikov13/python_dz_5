@@ -56,16 +56,16 @@ def last_move(input_string: str, number: int) -> int:
 def playng(candy: int, player: str, player_1: str, player_2: str) -> str:
     winner = ''
     while candy > 0:
-        '''
-        подсказка для первого игрока
-        '''
-        if player == player_1:
-            if candy > 57:
-                print('берите 28 конфет')
-            elif candy < 29:
-                print(f'берите {candy} конфет')
-            else:
-                print(f'берите {candy - 29} конфет')
+        # '''
+        # подсказка для первого игрока
+        # '''
+        # if player == player_1:
+        #     if candy > 57:
+        #         print('берите 28 конфет')
+        #     elif candy < 29:
+        #         print(f'берите {candy} конфет')
+        #     else:
+        #         print(f'берите {candy - 29} конфет')
 
         '''
         игровой процесс
@@ -80,8 +80,15 @@ def playng(candy: int, player: str, player_1: str, player_2: str) -> str:
                 winner = player_1
             else:
                 print(f'У нас {candy} конфет.')
-                move = get_number(
-                    f'{player} сколько вы берете кофет? Вы можете взять от 1 до 28: ')
+                if candy > 57:
+                    if ((candy-29) % 28) == 0:
+                        move = 1   
+                    else:
+                        move = (candy-29) % 28
+                else:
+
+                    move = candy - 29
+                print(f'=> Я беру {move} конфет')
                 candy -= move
                 player = player_1
                 winner = player_2
@@ -95,8 +102,8 @@ def playng(candy: int, player: str, player_1: str, player_2: str) -> str:
                 winner = player_1
             else:
                 print(f'У нас {candy} конфет.')
-                move = last_move(
-                    f'{player} сколько вы берете кофет? Вы можете взять от 1 до {candy}: ', candy)
+                move = candy
+                print(f'=> Я беру {move} конфет')
                 candy -= move
                 player = player_1
                 winner = player_2
@@ -104,9 +111,9 @@ def playng(candy: int, player: str, player_1: str, player_2: str) -> str:
 
 
 name_0 = 'Игрок_1'
-name_1 = 'Игрок_2'
+name_1 = 'Бот'
 gamer = get_player(name_0, name_1)
-sweet = 2021
+sweet = 100
 winner = playng(sweet, gamer, name_0, name_1)
 
 print(f'победил - > {winner} !!!')
